@@ -21,7 +21,7 @@ constructor (){
 
 //Hace que la persona que ejecute el contrato sea el admin por defecto
 usuarios[msg.sender] = roles(mod) ;
-//Pone la instacia en modo publico
+//Pone la instacia en modo publico - cualquiera puede agendar
 publico = true;
 
 }

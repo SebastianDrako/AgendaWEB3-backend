@@ -6,6 +6,11 @@ import "./Tipos_de_eventos/Gestion_tipos_evento.sol";
 
 contract gestion_de_eventos is permisos , tipos_evento {
 
+//Donde se almacenan los eventos
+
+
+
+
 
 // Estrucutura del evento
 
@@ -19,7 +24,46 @@ contract gestion_de_eventos is permisos , tipos_evento {
         uint[] hash_tipo_evento;
     }
 
+// Evento que dura 24 horas y marca recordatortios
+    struct recrodatorio {
+        string nombre;
+        string dsecripcion;
+        uint fecha;
+        address quien_agenda;
+        bool publico;
+        uint[] hash_tipo_evento;
+    }
+
+// Formas de evniar eventos una vez ejecutados los comandos
+    enum indexEvent { evento , confirmacion }
+
+    event newEvent(
+
+        indexEvent indexed eventype,
+        uint indexed eventNameHash,
+        evento eventInfo
+
+    );
+
+    event eventStatus (
+
+        indexEvent indexed eventype,
+        uint indexed eventNameHash,
+        evento eventInfo
+
+    );
 
 
+
+ function create_event () internal {
+
+
+     
+ }
+
+    function getTimeStampAndNameHash (string memory nombre) internal view returns(uint){
+        uint data = block.timestamp + uint(keccak256(abi.encodePacked(nombre)));
+        return uint(keccak256(abi.encodePacked(data)));
+    }
 
 }
