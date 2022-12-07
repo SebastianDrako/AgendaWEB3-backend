@@ -1,0 +1,222 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "level",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "addPermisos",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "nombre",
+						"type": "string"
+					}
+				],
+				"name": "agregarTipoDeEvento",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bool",
+						"name": "nval",
+						"type": "bool"
+					}
+				],
+				"name": "editPublico",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "hash",
+						"type": "uint256"
+					}
+				],
+				"name": "eliminarTipoDeEvento",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPermisosStatus",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "hash",
+						"type": "uint256"
+					}
+				],
+				"name": "hashANombreTipoDeEvento",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "level",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "modifyPermisos",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "nombre",
+						"type": "string"
+					}
+				],
+				"name": "nombreAHashTipoDeEvento",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "popPermisos",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Agenda_Gestor.sol": "agenda"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Agenda_Gestor.sol": {
+			"keccak256": "0x87926ae3f103614065c84adffc981157a7aeb547c5bbfed774a7f8e06771710b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9892bc52f09a1eff816e99c2326d9d1fdb183882bb6bf8492da44230a27e3daa",
+				"dweb:/ipfs/QmcMPi3MZihHQhyXWwgxgE1NC2UE1q8S6JG4n5mBedwkvv"
+			]
+		},
+		"Opciones/Basical_operations.sol": {
+			"keccak256": "0xec6eae374a08820a5258387ce7b3668d12ab184f7ff5b282ca924087f01e6a3d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d55063befed4f870e5a8aa14bf684c289a74dc95a80e4c023153919a1c865b0d",
+				"dweb:/ipfs/QmYAAhMwvDEsLXt4f2Ys9q3VxfHG7NSLHvfQxSPyp4opNV"
+			]
+		},
+		"Opciones/Eventos/Gestion_De_Eventos.sol": {
+			"keccak256": "0x97d596602850787c8f8c58c9b0f0e2314cf9cff661f31affc680a420b70bbe7e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://35d4bfd6974bf9d1229721d165363aa1ac602636053b4ccaaa45b856803eff5a",
+				"dweb:/ipfs/QmXo5uq54rGf7Yc2D9eeGXPX1svcYEPHEtDFXbcZ9qBgnp"
+			]
+		},
+		"Opciones/Eventos/Tipos_de_eventos/Gestion_tipos_evento.sol": {
+			"keccak256": "0xeab23d10d919ae634f08449ce1a64099ac9ba8051cc67f3e85096f259aa160ba",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f77cefc2ead7a3cd439ba2b401688ccffae15b79e9f10008c08d65417fb63e08",
+				"dweb:/ipfs/Qmcr1QjH7K41yhMh95bboWd7Brjy9ff6UNh7gZAHsAxW4G"
+			]
+		},
+		"Opciones/Gestion_De_Permisos.sol": {
+			"keccak256": "0x45075aac6b1de84872456868cee856aeed89eebcf83a9bef58e7812f9049b530",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5d3675e29099fc5baa0c9d3ac7955deaa3e199490accdc52e7abc3e632da6036",
+				"dweb:/ipfs/QmZa6tUfTeEkhmy9N7J9VEQqaTtQgHgHLKd5L2k2ksyimq"
+			]
+		}
+	},
+	"version": 1
+}
