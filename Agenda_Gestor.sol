@@ -17,7 +17,12 @@ contract agenda is basic_logic , permisos , gestion_de_eventos{
 // Configuracion de la primera ejecucion
 constructor (){
 
- permiso_mod.push (address(msg.sender)) ;
+// COnfiguracion inicial
+
+//Hace que la persona que ejecute el contrato sea el admin por defecto
+usuarios[msg.sender] = roles(mod) ;
+//Pone la instacia en modo publico
+publico = true;
 
 }
 }
