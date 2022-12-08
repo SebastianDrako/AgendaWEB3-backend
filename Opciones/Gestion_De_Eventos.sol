@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "../Gestion_De_Permisos.sol";
-import "./Tipos_de_eventos/Gestion_tipos_evento.sol";
+import "./Gestion_De_Permisos.sol";
+import "./Eventos/Tipos_de_eventos/Gestion_tipos_evento.sol";
 
 contract gestion_de_eventos is permisos , tipos_evento {
 
@@ -41,16 +41,14 @@ mapping (uint => recrodatorio[]) recrodatoriosPorFecha;
     event newEvent(
 
         indexEvent indexed eventype,
-        uint indexed eventNameHash,
-        evento eventInfo
+        uint indexed eventNameHash
 
     );
 
     event eventStatus (
 
         indexEvent indexed eventype,
-        uint indexed eventNameHash,
-        evento eventInfo
+        uint indexed eventNameHash
 
     );
 

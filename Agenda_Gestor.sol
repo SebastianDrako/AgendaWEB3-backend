@@ -8,7 +8,7 @@ import "./Opciones/Basical_operations.sol";
 import "./Opciones/Gestion_De_Permisos.sol";
 
 // Gestion de eventos
-import "./Opciones/Eventos/Gestion_De_Eventos.sol";
+import "./Opciones/Gestion_De_Eventos.sol";
 
 
 
