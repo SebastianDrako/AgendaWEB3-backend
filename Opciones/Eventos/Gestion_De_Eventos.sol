@@ -8,7 +8,8 @@ contract gestion_de_eventos is permisos , tipos_evento {
 
 //Donde se almacenan los eventos
 
-
+mapping (uint => evento[]) eventosPorFecha;
+mapping (uint => recrodatorio[]) recrodatoriosPorFecha;
 
 
 
@@ -58,7 +59,7 @@ contract gestion_de_eventos is permisos , tipos_evento {
  function create_event () internal {
 
 
-     
+
  }
 
     function getTimeStampAndNameHash (string memory nombre) internal view returns(uint){
