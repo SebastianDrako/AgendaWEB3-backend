@@ -12,7 +12,7 @@ contract tipos_evento is permisos {
     //funcion para interactuar con los mapas de tipo de evento
 
     function agregarTipoDeEvento (string memory nombre) public {
-        require(permisosCheck(mod));
+        require(permisosCheck(roles.mod));
         uint hash = uint(keccak256(abi.encodePacked(nombre)));
          eventos[hash] = nombre;
          evento_rev[nombre] = hash;
@@ -23,7 +23,7 @@ contract tipos_evento is permisos {
     function nombreAHashTipoDeEvento (string memory nombre) public view returns(uint){return evento_rev[nombre];}
 
     function eliminarTipoDeEvento (uint hash) public {
-        require(permisosCheck(mod));
+        require(permisosCheck(roles.mod));
         delete evento_rev[eventos[hash]]; 
         delete eventos[hash];
         }

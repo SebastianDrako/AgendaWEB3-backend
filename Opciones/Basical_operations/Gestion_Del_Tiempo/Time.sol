@@ -5,7 +5,7 @@ import "../Bool_analisis/Bool.sol";
 
 contract time is bool_analisis {
 
-
+uint timeZone;
 
 struct date {
 
@@ -20,10 +20,10 @@ struct date {
 
 
 // Funcion que obtiene Segundos, Minutos, Hora, dias y años segun calendario gregoriano y Fijo internacional
- function fechaGet (int timeZone) view public returns( uint[5] memory) {
+ function fechaGet (int _timeZone) view public returns( uint[5] memory) {
 
      //Obtiene los segundos acumulados desde unix y los desfaza segun la zona horaria.
-    uint segundosAcumEpoch = uint((int(block.timestamp) + (timeZone*60*60)));
+    uint segundosAcumEpoch = uint((int(block.timestamp) + (_timeZone*60*60)));
 
     // obtiene los valores de Minutos, Hora, dias y años acomulados desde unix
     uint minutosAcumEpoch = (segundosAcumEpoch/60) ;
@@ -44,12 +44,12 @@ struct date {
 
 
 //Funcion que calcula la catnidad de dias bisiestos para una fecha
- function cuantosDiasBisiestos (int timeZone) internal view returns(uint) {
+ function cuantosDiasBisiestos (int _timeZone) internal view returns(uint) {
      // Varibla contador de dias bisiestos
     uint diasBi = 0;
 
     // Obtiene el año solicitado de la funcion fechaGet
-    uint year = fechaGet(timeZone)[4];
+    uint year = fechaGet(_timeZone)[4];
 
     //Evalua para cada año desde epoch hasta el año solicitado la catnidad de años bisiestos y los cuenta
      for( uint c = 1970 ; c < year ; c++)
@@ -62,3 +62,7 @@ struct date {
 
  }
 
+
+//view 
+
+//pure

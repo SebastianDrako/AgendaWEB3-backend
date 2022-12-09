@@ -6,12 +6,7 @@ import "./Basical_operations.sol";
 contract permisos is basic_logic{
 
     // Enum con los posibles roles
-    enum roles{mod , agend, ver, pub}
-
-    uint constant pub = 0;
-    uint constant ver = 1;
-    uint constant agend = 2;
-    uint constant mod = 3;
+    enum roles{pub , ver, agend, mod}
 
     // mapeo de los usuarios
     mapping(address => roles) usuarios;
@@ -21,33 +16,33 @@ contract permisos is basic_logic{
 
     // Funcion que permite cambiar el estado de "publico"
     function editPublico (bool nval) public{
-        require(permisosCheck(mod));
+        require(permisosCheck(roles.mod));
         publico = nval;
 
     }
 
 //validacion de identidad
 // niveles de permisos: 0 (pub) ; 1 (ver) ; 2 (agend) ; 3 (mod)
-    function permisosCheck(uint level) internal view returns(bool){
-        if (level == 0 && publico) {return true;}
-        else if (level != 0 && level <= uint(usuarios[msg.sender])) {return true;}
+    function permisosCheck(roles level) internal view returns(bool){
+        if (level == roles.pub && publico) {return true;}
+        else if (level != roles.pub && level <= usuarios[msg.sender]) {return true;}
         else return false;
     }
 
 // Funciones para agregar usuarios
 
-    function addPermisos (uint level, address user) public {
-        require(permisosCheck(mod));
+    function addPermisos (roles level, address user) public {
+        require(permisosCheck(roles.mod));
         usuarios[user] = roles(level) ;
     }
 
-    function modifyPermisos (uint level, address user) public {
+    function modifyPermisos (roles level, address user) public {
         addPermisos(level,user);
     }
 
 // Funcion para eliminar usuarios
     function popPermisos (address user) public {
-    require(permisosCheck(mod));      
+    require(permisosCheck(roles.mod));      
     delete usuarios[user] ;
     }
 
