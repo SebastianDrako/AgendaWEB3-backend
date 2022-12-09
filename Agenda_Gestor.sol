@@ -23,6 +23,8 @@ constructor (){
 usuarios[msg.sender] = roles(mod) ;
 //Pone la instacia en modo publico - cualquiera puede agendar
 publico = true;
+//Zona horaria
+timeZone = 0
 
 }
 }

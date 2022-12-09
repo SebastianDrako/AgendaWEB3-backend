@@ -8,4 +8,6 @@ import "./Basical_operations/Busqueda/Busquedas.sol";
 //aqui se crearan los fracmentos de codigo que permiten hacer operacines tediosas
 contract basic_logic is time , search {
 
+
+
 }
