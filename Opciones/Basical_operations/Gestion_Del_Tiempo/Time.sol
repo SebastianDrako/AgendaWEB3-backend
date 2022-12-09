@@ -5,7 +5,11 @@ import "../Bool_analisis/Bool.sol";
 
 contract time is bool_analisis {
 
-uint timeZone;
+int timeZone = 0;
+
+event Comptime(uint time, uint timeandZone);
+
+
 
 struct date {
 
@@ -20,10 +24,10 @@ struct date {
 
 
 // Funcion que obtiene Segundos, Minutos, Hora, dias y años segun calendario gregoriano y Fijo internacional
- function fechaGet (int _timeZone) view public returns( uint[5] memory) {
+ function fechaNoFixGet (int _timeZone , uint segundosEpoch) public pure returns( uint[5] memory) {
 
      //Obtiene los segundos acumulados desde unix y los desfaza segun la zona horaria.
-    uint segundosAcumEpoch = uint((int(block.timestamp) + (_timeZone*60*60)));
+    uint segundosAcumEpoch = uint((int(segundosEpoch) + (_timeZone*60*60)));
 
     // obtiene los valores de Minutos, Hora, dias y años acomulados desde unix
     uint minutosAcumEpoch = (segundosAcumEpoch/60) ;
@@ -44,20 +48,46 @@ struct date {
 
 
 //Funcion que calcula la catnidad de dias bisiestos para una fecha
- function cuantosDiasBisiestos (int _timeZone) internal view returns(uint) {
+ function cuantosDiasBisiestos (uint year) public pure returns(uint) {
      // Varibla contador de dias bisiestos
     uint diasBi = 0;
 
-    // Obtiene el año solicitado de la funcion fechaGet
-    uint year = fechaGet(_timeZone)[4];
 
     //Evalua para cada año desde epoch hasta el año solicitado la catnidad de años bisiestos y los cuenta
      for( uint c = 1970 ; c < year ; c++)
-     {if (c % 4 == 0 && (c % 100 != 0 || c % 400 == 0)){diasBi++ ;}}
+     {if ( esYearBisiesto( c )){diasBi++ ;}}
 
      //Devuelve la catidad de años bisiestos cotados
      return diasBi;
  }
+
+
+//Funcion para saber si un dia es bisiesto
+
+    function esYearBisiesto (uint year) internal pure returns(bool){
+
+        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+        {return true;} 
+        else {return false;}
+
+    }
+
+// Funcion que devuelve una fehca arreglada
+
+function fechaGet (uint seg) public view returns(uint[5] memory){
+    
+    uint[5] memory fecha = fechaNoFixGet( timeZone , seg);
+
+    fecha[3] = fecha[3] - cuantosDiasBisiestos( fecha[4] ) ;
+
+    if ( esYearBisiesto(fecha[4]) ) {
+        fecha[3] --;
+    } 
+
+    return fecha;
+
+}
+
 
 
  }
