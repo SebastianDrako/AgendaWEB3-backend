@@ -5,47 +5,27 @@ import "../Bool_analisis/Bool.sol";
 
 contract time is bool_analisis {
 
-int timeZone = 0;
-
-event Comptime(uint time, uint timeandZone);
+int timeZone = -5;
 
 
+    function getAcumMinutes (uint seg) public pure returns(uint) { return seg / 60 ;}
 
-struct date {
+    function getAcumHours (uint seg) public pure  returns(uint) { return getAcumMinutes(seg) / 60 ;}
 
-    uint segundo;
-    uint minuto;
-    uint hora;
-    uint dia;
-    uint mes;
-    uint year;
+    function getAcumDays (uint seg) public pure  returns(uint) { return getAcumHours(seg) / 24 ;}
 
-}
+    function getAcumYears (uint seg) public pure returns(uint) { return getAcumDays(seg) / 365 ;}
 
 
-// Funcion que obtiene Segundos, Minutos, Hora, dias y años segun calendario gregoriano y Fijo internacional
- function fechaNoFixGet (int _timeZone , uint segundosEpoch) public pure returns( uint[5] memory) {
+//Funcion para saber si un año es bisiesto
 
-     //Obtiene los segundos acumulados desde unix y los desfaza segun la zona horaria.
-    uint segundosAcumEpoch = uint((int(segundosEpoch) + (_timeZone*60*60)));
+    function esYearBisiesto (uint year) public pure returns(bool){
 
-    // obtiene los valores de Minutos, Hora, dias y años acomulados desde unix
-    uint minutosAcumEpoch = (segundosAcumEpoch/60) ;
-    uint horasAcumEpoch = (minutosAcumEpoch / 60) ;
-    uint diasAcumEpoch = (horasAcumEpoch / 24) ;
-    uint yearAcumEpoch = (diasAcumEpoch / 365);
+        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+        {return true;} 
+        else {return false;}
 
-    // Obtiene Segundos, Minutos, Hora, dias , anuales y el año segun calendario fijo y gregoriano
-    uint segundos = segundosAcumEpoch - (minutosAcumEpoch * 60);
-    uint minutos = minutosAcumEpoch - (horasAcumEpoch * 60);
-    uint horas = horasAcumEpoch - (diasAcumEpoch * 24);
-    uint dias = diasAcumEpoch - (yearAcumEpoch * uint(365));
-    uint year = yearAcumEpoch + 1970 ;
-
-    //Devuelve la informacion en una lista
-    return ([ segundos , minutos  , horas , dias , year]) ;
- }
-
+    }
 
 //Funcion que calcula la catnidad de dias bisiestos para una fecha
  function cuantosDiasBisiestos (uint year) public pure returns(uint) {
@@ -61,38 +41,38 @@ struct date {
      return diasBi;
  }
 
+ function fechaGet (uint seg) public view returns(uint[5] memory){
 
-//Funcion para saber si un dia es bisiesto
+    // Ajusta el tiempo a la zonaHoraria
+     seg = uint(int(seg) + (timeZone * 3600)) ;
 
-    function esYearBisiesto (uint year) internal pure returns(bool){
+     // Se fija el año actual teniendo en cuenta la fecha de epoch
+    uint yearToEval = getAcumYears(seg) + 1970;
+    // Prueba que valida si se esta en un año bisiesto
+     bool test = esYearBisiesto( yearToEval ) ;
+    // Si el año es bisiesto se deben restar los segundos de los dias bisiestos tracturridos hasta el año anterior desde epoch , de lo contrario se deben restar los segundos de los dias bisiestos tracturridos hasta el año desde epoch
+     if ( test ) { seg = seg - (cuantosDiasBisiestos(yearToEval - 1) * 86400);}
+     else { seg = seg - ( cuantosDiasBisiestos(yearToEval) * 86400 ); }
 
-        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
-        {return true;} 
-        else {return false;}
+    // obtiene los valores de Minutos, Hora, dias y años acomulados desde unix con ajuste
+    uint minutosAcumEpoch = getAcumMinutes(seg) ;
+    uint horasAcumEpoch = getAcumHours(seg) ;
+    uint diasAcumEpoch = getAcumDays(seg) ;
+    uint yearAcumEpoch = getAcumYears(seg);
 
-    }
 
-// Funcion que devuelve una fehca arreglada
+    // Obtiene Segundos, Minutos, Hora, dias , anuales y el año segun calendario fijo y gregoriano
+    uint segundos = seg - (minutosAcumEpoch * 60);
+    uint minutos = getAcumMinutes(seg) - (horasAcumEpoch * 60);
+    uint horas = horasAcumEpoch - (diasAcumEpoch * 24);
+    // El mas uno se agrega por que apartir de las 0:0:01 es el dia 1
+    uint dias = (diasAcumEpoch - (yearAcumEpoch * uint(365))) + 1;
+    uint year = yearAcumEpoch + 1970 ;
 
-function fechaGet (uint seg) public view returns(uint[5] memory){
-    
-    uint[5] memory fecha = fechaNoFixGet( timeZone , seg);
-
-    fecha[3] = fecha[3] - cuantosDiasBisiestos( fecha[4] ) ;
-
-    if ( esYearBisiesto(fecha[4]) ) {
-        fecha[3] --;
-    } 
-
-    return fecha;
+    return ([ segundos , minutos  , horas , dias , year]) ;
 
 }
 
 
 
- }
-
-
-//view 
-
-//pure
+}
