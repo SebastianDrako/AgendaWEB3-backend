@@ -11,7 +11,7 @@ contract calendar is time {
 
 
 
- function fixGregoriano (uint dias , uint year) public returns(uint[2] memory) {
+ function fixGregoriano (uint dias , uint year) public view returns(uint[2] memory) {
 
      uint[12] memory list = mesesGregorianos;
 
@@ -29,11 +29,12 @@ for ( uint i = 0 ; i < list.length ;  i++ ) {
    } else { dias = dias - list[i];}
 }
 
+return [uint(0) , uint(0)];
 
  }
 
 
- function getGregoriano (uint seg) public returns(uint[6] memory) {
+ function getGregoriano (uint seg) public view returns(uint[6] memory) {
 
     uint[5] memory fecha = fechaGet(seg);
     uint[2] memory mesdia = fixGregoriano(fecha[3] , fecha[4]);

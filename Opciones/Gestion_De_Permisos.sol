@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "./Basical_operations.sol";
 
-contract permisos is basic_logic{
+
+contract permisos {
 
     // Enum con los posibles roles
     enum roles{pub , ver, agend, mod}

@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MZL
 pragma solidity ^0.8.7;
 
-import "../Bool_analisis/Bool.sol";
-
-contract time is bool_analisis {
+contract time {
 
 int timeZone = -5;
 
